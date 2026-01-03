@@ -32,7 +32,11 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# Next.js (not used in this Vite project)
 next-env.d.ts
+next.config.js
+/.next
 
 # IDE
 .vscode/
