@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Send, Rocket, Building2, Mail, User, MessageSquare, Phone, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import HeroBackground from "@/components/HeroBackground";
 
 export default function RequestPilot() {
@@ -25,16 +24,24 @@ export default function RequestPilot() {
     setError(null);
 
     try {
-      const { error } = await supabase.functions.invoke("send-pilot-request", {
-        body: formData,
+      const response = await fetch("/api/send-pilot-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-      if (error) throw error;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit your request");
+      }
 
       setIsSubmitted(true);
     } catch (err: any) {
       console.error("Error submitting form:", err);
-      setError("Failed to submit your request. Please try again.");
+      setError(err.message || "Failed to submit your request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
