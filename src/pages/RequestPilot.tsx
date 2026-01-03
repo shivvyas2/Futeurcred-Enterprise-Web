@@ -236,7 +236,6 @@ export default function RequestPilot() {
                   className="w-full flex items-center justify-center gap-2 px-8 py-5 bg-white text-[#0B1020] rounded-xl font-semibold text-lg uppercase hover:bg-white/90 transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? "Submitting..." : "Submit"}
-                  <Send className="w-5 h-5" />
                 </Button>
 
                 <p className="text-sm text-white/50 text-center">

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function PremiumCTASection() {
@@ -41,20 +40,19 @@ export default function PremiumCTASection() {
               className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl"
               asChild
             >
-              <Link to="/request-pilot" className="flex items-center gap-2.5">
-                <span>Request a Pilot</span>
-                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              <Link to="/request-pilot">
+                Request a Pilot
               </Link>
             </Button>
             
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white/20 text-white hover:bg-white/5 hover:border-white/30 font-medium shadow-lg hover:shadow-xl"
+              className="border-2 border-white/20 text-white hover:bg-white/5 hover:border-white/30 hover:text-white font-medium shadow-lg hover:shadow-xl"
               asChild
             >
-              <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-                <span>View Documentation</span>
+              <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer">
+                View Documentation
               </a>
             </Button>
           </div>

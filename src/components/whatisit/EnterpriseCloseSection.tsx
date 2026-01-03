@@ -105,19 +105,19 @@ function SuperCard() {
             className="bg-white text-black font-semibold hover:bg-white/90 shadow-lg hover:shadow-xl"
             asChild
           >
-            <Link to="/request-pilot" className="flex items-center gap-2.5">
-              <span>Request Private Pilot</span>
+            <Link to="/request-pilot">
+              Request Private Pilot
             </Link>
           </Button>
           <Button 
             variant="outline"
             size="lg"
-            className="border-2 border-white/20 text-white font-medium hover:bg-white/10 hover:border-white/30 shadow-lg hover:shadow-xl"
+              className="border-2 border-white/20 text-white font-medium hover:bg-white/10 hover:border-white/30 hover:text-white shadow-lg hover:shadow-xl"
             asChild
           >
-            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-              <span>View API Docs</span>
-            </a>
+              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                View API Docs
+              </a>
           </Button>
         </div>
         

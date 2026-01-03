@@ -57,20 +57,18 @@ export default function HomePage() {
                   className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link to="/request-pilot" className="flex items-center gap-2.5">
-                    <Icon name="speedometer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
-                    <span>Start Free Integration</span>
+                  <Link to="/request-pilot">
+                    Start Free Integration
                   </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 bg-transparent font-medium shadow-lg hover:shadow-xl"
+                  className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white bg-transparent font-medium shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-                    <Icon name="computer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
-                    <span>View API Docs</span>
+                  <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                    View API Docs
                   </a>
                 </Button>
               </div>
@@ -223,21 +221,18 @@ const preQual = await lumiq.prequalify({
               className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl uppercase tracking-wide"
               asChild
             >
-              <Link to="/request-pilot" className="flex items-center gap-3">
-                <Icon name="speedometer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
-                <span>Start Free Integration</span>
-                <Icon name="paper plane.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
+              <Link to="/request-pilot">
+                Start Free Integration
               </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/40 bg-transparent font-medium shadow-lg hover:shadow-xl"
+              className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/40 hover:text-white bg-transparent font-medium shadow-lg hover:shadow-xl"
               asChild
             >
-              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-                <Icon name="computer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
-                <span>View Technical Docs</span>
+              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                View Technical Docs
               </a>
             </Button>
           </div>

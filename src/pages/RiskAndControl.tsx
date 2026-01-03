@@ -6,7 +6,6 @@ import RiskControlScreen2 from "@/components/risk/RiskControlScreen2";
 import RiskControlScreen3 from "@/components/risk/RiskControlScreen3";
 import RiskControlScreen4 from "@/components/risk/RiskControlScreen4";
 import RiskControlScreen5 from "@/components/risk/RiskControlScreen5";
-import { Rocket, FileText } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function RiskAndControlPage() {
@@ -44,20 +43,18 @@ export default function RiskAndControlPage() {
             className="bg-white text-[#0B1020] font-semibold shadow-xl hover:shadow-2xl uppercase tracking-wide hover:bg-white/90"
             asChild
           >
-            <Link to="/request-pilot" className="flex items-center gap-2.5">
-              <Rocket className="h-5 w-5 flex-shrink-0" />
-              <span>Request Private Pilot</span>
+            <Link to="/request-pilot">
+              Request Private Pilot
             </Link>
           </Button>
           <Button
             size="lg"
             variant="outline"
-            className="border-2 border-white/30 text-white font-semibold uppercase tracking-wide hover:bg-white/10 hover:border-white/40 bg-white/5 shadow-lg hover:shadow-xl"
+              className="border-2 border-white/30 text-white font-semibold uppercase tracking-wide hover:bg-white/10 hover:border-white/40 hover:text-white bg-white/5 shadow-lg hover:shadow-xl"
             asChild
           >
-            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-              <FileText className="h-5 w-5 flex-shrink-0" />
-              <span>View API Docs</span>
+            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+              View API Docs
             </a>
           </Button>
         </div>
@@ -95,9 +92,8 @@ export default function RiskAndControlPage() {
             className="bg-white text-[#0B1020] font-semibold shadow-xl hover:shadow-2xl uppercase tracking-wide hover:bg-white/90"
             asChild
           >
-            <Link to="/request-pilot" className="flex items-center gap-3">
-              <Icon name="rocket.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
-              <span>Request a Private Pilot</span>
+            <Link to="/request-pilot">
+              Request a Private Pilot
             </Link>
           </Button>
           <p className="text-sm text-white/50 mt-6 font-medium">

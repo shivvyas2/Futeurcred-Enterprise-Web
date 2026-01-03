@@ -475,7 +475,7 @@ export default function BridgeSection() {
                         ${
                           activeTab === tab.id
                             ? "bg-white/10 border-white/20 text-white"
-                            : "bg-white/5 border-white/10 text-white/60 hover:bg-white/[0.08] hover:border-white/15"
+                            : "bg-white/5 border-white/10 text-white/60 hover:bg-white/[0.08] hover:border-white/15 hover:text-white"
                         }
                       `}
                     >
@@ -503,18 +503,18 @@ export default function BridgeSection() {
                       className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                       asChild
                     >
-                      <Link to="/request-pilot" className="flex items-center gap-2.5">
-                        <span>Request a Pilot</span>
+                      <Link to="/request-pilot">
+                        Request a Pilot
                       </Link>
                     </Button>
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-medium bg-transparent shadow-lg hover:shadow-xl"
+                      className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white font-medium bg-transparent shadow-lg hover:shadow-xl"
                       asChild
                     >
-                      <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-                        <span>View Technical Docs</span>
+                      <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                        View Technical Docs
                       </a>
                     </Button>
                   </div>

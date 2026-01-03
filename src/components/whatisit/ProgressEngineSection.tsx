@@ -218,11 +218,11 @@ export function ProgressEngineSection() {
             >
               <Button 
                 size="lg"
-                className="bg-slate-900 text-white font-semibold hover:bg-slate-800 shadow-lg hover:shadow-xl"
+                className="bg-slate-900 text-white font-semibold hover:bg-slate-800 hover:text-white shadow-lg hover:shadow-xl"
                 asChild
               >
-                <Link to="/request-pilot" className="flex items-center gap-2.5">
-                  <span>Request Private Pilot</span>
+                <Link to="/request-pilot">
+                  Request Private Pilot
                 </Link>
               </Button>
               <a 

@@ -8,7 +8,6 @@ import { ProductClaritySection } from "@/components/whatisit/ProductClaritySecti
 import { ProgressEngineSection } from "@/components/whatisit/ProgressEngineSection"
 import { EnterpriseCloseSection } from "@/components/whatisit/EnterpriseCloseSection"
 import { ContactFormSection } from "@/components/whatisit/ContactFormSection"
-import { ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 
 export default function WhatIsItPage() {
@@ -58,9 +57,8 @@ export default function WhatIsItPage() {
                   className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link to="/request-pilot" className="flex items-center gap-2.5">
-                    <span>Request Private Pilot</span>
-                    <ArrowRight className="h-4 w-4 flex-shrink-0" />
+                  <Link to="/request-pilot">
+                    Request Private Pilot
                   </Link>
                 </Button>
                 <a 

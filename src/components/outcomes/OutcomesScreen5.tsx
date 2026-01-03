@@ -304,19 +304,18 @@ export default function OutcomesScreen5() {
                 className="bg-white text-[#0B1020] font-semibold shadow-xl hover:shadow-2xl hover:bg-white/90"
                 asChild
               >
-                <Link to="/request-pilot" className="flex items-center gap-2.5">
-                  <Rocket className="h-5 w-5 flex-shrink-0" />
-                  <span>Request a Private Pilot</span>
+                <Link to="/request-pilot">
+                  Request a Private Pilot
                 </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/20 text-white/70 font-semibold hover:bg-white/5 hover:text-white hover:border-white/30 shadow-lg hover:shadow-xl"
+                className="border-2 border-white/20 text-white font-semibold hover:bg-white/5 hover:text-white hover:border-white/30 shadow-lg hover:shadow-xl"
                 asChild
               >
-                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
-                  <span>Documentation</span>
+                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                  Documentation
                 </a>
               </Button>
             </div>

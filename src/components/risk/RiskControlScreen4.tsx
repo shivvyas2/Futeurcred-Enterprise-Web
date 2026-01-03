@@ -135,7 +135,7 @@ export default function RiskControlScreen4() {
                               className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-all hover:scale-105 ${
                                 chip.optional 
                                   ? 'bg-amber-500/10 text-amber-300 border border-amber-500/20 hover:bg-amber-500/20' 
-                                  : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10'
+                                  : 'bg-white/5 text-white/70 border border-white/10 hover:bg-white/10 hover:text-white'
                               }`}
                               initial={{ opacity: 0, scale: 0.9 }}
                               whileInView={{ opacity: 1, scale: 1 }}

@@ -499,7 +499,6 @@ export default function ProblemHookSection() {
               size="lg"
               className="bg-white text-gray-900 hover:bg-white/90 px-8 py-4 text-base font-bold rounded-full"
             >
-              <Icon name="rocket.svg" className="mr-2 h-5 w-5" width={20} height={20} />
               Learn How It Works
             </Button>
           </Link>
