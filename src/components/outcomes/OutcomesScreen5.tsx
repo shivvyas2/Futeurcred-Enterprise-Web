@@ -311,10 +311,10 @@ export default function OutcomesScreen5() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-2 border-white/20 text-white font-semibold hover:bg-white/5 hover:text-white hover:border-white/30 shadow-lg hover:shadow-xl"
+                className="border-2 border-white/20 text-black bg-white hover:bg-white/90 hover:border-white/30 hover:text-black font-semibold shadow-lg hover:shadow-xl"
                 asChild
               >
-                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="text-black">
                   Documentation
                 </a>
               </Button>
