@@ -1,26 +1,21 @@
-"use client"
-
-import Image from "next/image"
-import type { ReactNode } from "react"
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 
 interface HeroBackgroundProps {
   imagePath: string
-  children: ReactNode
+  children: React.ReactNode
   className?: string
-  priority?: boolean
 }
 
-export default function HeroBackground({ imagePath, children, className = "", priority = false }: HeroBackgroundProps) {
+export default function HeroBackground({ imagePath, children, className = "" }: HeroBackgroundProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
 
   useEffect(() => {
     // Preload the image with high priority
-    const optimizedSrc = `/_next/image?url=${encodeURIComponent(imagePath)}&w=1920&q=75`
     const img = new window.Image()
     img.loading = 'eager'
-    img.src = optimizedSrc
+    img.src = imagePath
+    
     // If image is already cached, set loaded immediately
     if (img.complete) {
       setImageLoaded(true)
@@ -37,7 +32,7 @@ export default function HeroBackground({ imagePath, children, className = "", pr
     const link = document.createElement('link')
     link.rel = 'preload'
     link.as = 'image'
-    link.href = optimizedSrc
+    link.href = imagePath
     document.head.appendChild(link)
 
     return () => {
@@ -59,23 +54,15 @@ export default function HeroBackground({ imagePath, children, className = "", pr
           }`}
         />
         {/* Actual background image - fades in smoothly */}
-        {!imageError && (
-          <Image
-            src={imagePath}
-            alt=""
-            fill
-            priority={priority}
-            sizes="100vw"
-            className={`object-cover object-center transition-opacity duration-1000 ease-out ${
-              imageLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
-            style={{
-              willChange: imageLoaded ? 'auto' : 'opacity',
-            }}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageError(true)}
-          />
-        )}
+        <div 
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ease-out ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ 
+            backgroundImage: `url('${imagePath}')`,
+            willChange: imageLoaded ? 'auto' : 'opacity'
+          }}
+        />
       </div>
       
       {/* Overlay */}

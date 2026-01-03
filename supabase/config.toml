@@ -1,0 +1,4 @@
+project_id = "sbibtyznoseybhwlahel"
+
+[functions.send-pilot-request]
+verify_jwt = false

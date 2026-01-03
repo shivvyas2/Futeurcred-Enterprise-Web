@@ -1,26 +1,23 @@
-"use client"
-
-import Link from "next/link"
-import Image from "next/image"
+import { Link, useLocation } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
-import { usePathname } from "next/navigation"
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
+  const location = useLocation();
+  const pathname = location.pathname;
   
   // Define which routes should have white header
   const whiteHeaderRoutes = ['/dashboard', '/login', '/register', '/docs'];
   const isWhiteHeader = whiteHeaderRoutes.includes(pathname);
   
   // Define which routes should have transparent header
-  const transparentHeaderRoutes = ['/contact-us', '/about', '/', '/business', '/lumiq-build', '/credit-journey', '/how-it-works', '/risk-and-control', '/outcomes', '/what-is-it'];
+  const transparentHeaderRoutes = ['/contact-us', '/about', '/', '/business', '/lumiq-build', '/credit-journey', '/how-it-works', '/risk-and-control', '/outcomes', '/what-is-it', '/privacy-policy', '/terms-of-service'];
   const isTransparentHeader = transparentHeaderRoutes.includes(pathname);
   
-  // Define which routes should have black text (only About page)
-  const blackTextRoutes = ['/about'];
+  // Define which routes should have black text (pages with light backgrounds)
+  const blackTextRoutes: string[] = [];
   const useBlackText = blackTextRoutes.includes(pathname);
   
   // Track scroll position for background changes
@@ -125,31 +122,28 @@ export default function Header() {
       }`}>
         <header className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
           {/* Logo */}
-          <div className="flex items-center h-8 overflow-hidden">
-            <Link href="/" className="cursor-pointer block h-full flex items-center">
-              <Image 
+          <div className="flex items-center h-12 overflow-hidden">
+            <Link to="/" className="cursor-pointer block h-full flex items-center">
+              <img 
                 src="/Lumiqailogo.png" 
                 alt="Lumiqai Logo" 
-                width={120} 
-                height={24}
-                className="transition-opacity hover:opacity-80 object-contain h-full w-auto"
-                priority
+                className="transition-opacity hover:opacity-80 object-contain h-full w-auto max-h-12"
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/what-is-it" className={`transition-colors ${getLinkColor()}`}>
+            <Link to="/what-is-it" className={`transition-colors ${getLinkColor()}`}>
               What Is It
             </Link>
-            <Link href="/how-it-works" className={`transition-colors ${getLinkColor()}`}>
+            <Link to="/how-it-works" className={`transition-colors ${getLinkColor()}`}>
               How It Works
             </Link>
-            <Link href="/risk-and-control" className={`transition-colors ${getLinkColor()}`}>
+            <Link to="/risk-and-control" className={`transition-colors ${getLinkColor()}`}>
               Risk & Control
             </Link>
-            <Link href="/outcomes" className={`transition-colors ${getLinkColor()}`}>
+            <Link to="/outcomes" className={`transition-colors ${getLinkColor()}`}>
               Outcomes
             </Link>
           </nav>
@@ -160,7 +154,21 @@ export default function Header() {
               href="https://www.futeurcredx.com/login" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`rounded-full px-8 py-2.5 font-semibold transition-all duration-300 ${getButtonStyle()} inline-flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-105 active:scale-95`}
+              className={`text-sm font-medium transition-all duration-200 px-4 py-2 rounded-full border ${
+                isScrolled 
+                  ? isTransparentHeader 
+                    ? useBlackText 
+                      ? 'text-slate-700 border-slate-300 hover:bg-slate-100 hover:border-slate-400' 
+                      : 'text-white/90 border-white/20 hover:bg-white/10 hover:border-white/30'
+                    : 'text-white/90 border-white/20 hover:bg-white/10 hover:border-white/30'
+                  : isWhiteHeader 
+                    ? 'text-slate-700 border-slate-300 hover:bg-slate-100 hover:border-slate-400'
+                    : isTransparentHeader
+                      ? useBlackText 
+                        ? 'text-slate-700 border-slate-300 hover:bg-slate-100 hover:border-slate-400' 
+                        : 'text-white/90 border-white/20 hover:bg-white/10 hover:border-white/30'
+                      : 'text-white/90 border-white/20 hover:bg-white/10 hover:border-white/30'
+              }`}
             >
               Login
             </a>
@@ -192,7 +200,7 @@ export default function Header() {
             {/* Mobile Navigation Links */}
             <nav className="flex flex-col space-y-4">
               <Link 
-                href="/what-is-it" 
+                to="/what-is-it" 
                 className={`text-xl py-3 border-b transition-colors ${
                   isWhiteHeader
                     ? 'text-slate-700 border-gray-200 hover:bg-blue-50'
@@ -207,7 +215,7 @@ export default function Header() {
                 What Is It
               </Link>
               <Link 
-                href="/how-it-works" 
+                to="/how-it-works" 
                 className={`text-xl py-3 border-b transition-colors ${
                   isWhiteHeader
                     ? 'text-slate-700 border-gray-200 hover:bg-blue-50'
@@ -222,7 +230,7 @@ export default function Header() {
                 How It Works
               </Link>
               <Link 
-                href="/risk-and-control" 
+                to="/risk-and-control" 
                 className={`text-xl py-3 border-b transition-colors ${
                   isWhiteHeader
                     ? 'text-slate-700 border-gray-200 hover:bg-blue-50'
@@ -237,7 +245,7 @@ export default function Header() {
                 Risk & Control
               </Link>
               <Link 
-                href="/outcomes" 
+                to="/outcomes" 
                 className={`text-xl py-3 border-b transition-colors ${
                   isWhiteHeader
                     ? 'text-slate-700 border-gray-200 hover:bg-blue-50'
@@ -277,4 +285,3 @@ export default function Header() {
     </>
   )
 }
-
