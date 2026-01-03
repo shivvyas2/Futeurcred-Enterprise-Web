@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 import Icon from "@/components/Icon"
+import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 interface ProductFeature {
   id: string
@@ -184,11 +186,39 @@ export default function LumiqProductsSection() {
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
           {products.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <Button
+            size="lg"
+            className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl"
+            asChild
+          >
+            <Link to="/request-pilot">
+              Request Pilot
+            </Link>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white bg-transparent font-medium shadow-lg hover:shadow-xl"
+            asChild
+          >
+            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+              View Docs
+            </a>
+          </Button>
+        </motion.div>
       </div>
     </section>
   )

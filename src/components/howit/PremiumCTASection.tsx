@@ -48,10 +48,10 @@ export default function PremiumCTASection() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white/20 text-white hover:bg-white/5 hover:border-white/30 hover:text-white font-medium shadow-lg hover:shadow-xl"
+              className="border-2 border-white/20 text-black bg-white hover:bg-white/90 hover:border-white/30 hover:text-black font-bold shadow-lg hover:shadow-xl"
               asChild
             >
-              <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer">
+              <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer" className="text-black">
                 View Documentation
               </a>
             </Button>

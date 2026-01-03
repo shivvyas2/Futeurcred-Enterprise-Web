@@ -32,8 +32,8 @@ export default function WhatIsItPage() {
           />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-20 pb-16 w-full overflow-x-hidden">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-[calc(100vh-200px)]">
             {/* Left: Copy */}
             <div className="space-y-8">
               <div className="inline-flex items-center gap-3 bg-white/10 px-5 py-2.5 rounded-full border border-white/20">

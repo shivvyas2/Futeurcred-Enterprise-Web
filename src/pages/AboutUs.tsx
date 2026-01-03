@@ -5,10 +5,10 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 px-6 bg-[#07124A] -mt-20">
+      <section className="relative pt-32 pb-24 px-6 bg-black -mt-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-black uppercase tracking-tight mb-6 text-white">
-            About <span className="text-blue-400">FuteurcredX</span>
+            About <span className="text-white">FuteurcredX</span>
           </h1>
           <p className="text-xl text-white/80 max-w-2xl mx-auto">
             We don't sell data. We decode it. Building the future of financial intelligence for fintechs and institutions worldwide.
@@ -38,7 +38,13 @@ export default function AboutUs() {
               </a>
             </div>
             <div className="bg-card border border-border rounded-2xl p-8">
-              <div className="text-6xl font-black text-primary mb-4">AI</div>
+              <div className="mb-4">
+                <img 
+                  src="/Lumiqailogo.png" 
+                  alt="LumiqAI Logo" 
+                  className="h-16 w-auto object-contain brightness-0"
+                />
+              </div>
               <h3 className="text-xl font-bold mb-2">LUMIQ AI™</h3>
               <p className="text-muted-foreground text-sm">
                 Our proprietary AI engine that powers intelligent credit decisioning, real-time monitoring, and predictive analytics for financial institutions.

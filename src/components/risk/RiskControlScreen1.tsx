@@ -111,19 +111,19 @@ export default function RiskControlScreen1() {
               transition={{ duration: 0.65, ease: "easeOut", delay: 0.12 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white rounded-3xl border border-[#0B1020]/8 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-8 relative overflow-hidden">
+              <div className="bg-white rounded-3xl border border-[#0B1020]/8 shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-6 sm:p-8 relative overflow-hidden">
                 {/* Two-lane diagram */}
-                <div className="grid md:grid-cols-2 gap-8 relative">
+                <div className="grid md:grid-cols-2 gap-6 md:gap-8 relative">
                   {/* Lane A - Sponsor stays */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 mb-6">
-                      <div className="h-2 w-2 rounded-full bg-[#0B1020]/40" />
-                      <h3 className="text-sm font-bold text-[#0B1020]/80 uppercase tracking-wide">
+                  <div className="space-y-4 min-w-0">
+                    <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                      <div className="h-2 w-2 rounded-full bg-[#0B1020]/40 flex-shrink-0" />
+                      <h3 className="text-xs sm:text-sm font-bold text-[#0B1020]/80 uppercase tracking-wide break-words">
                         Sponsor Underwriting Stays
                       </h3>
                     </div>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-2.5 sm:space-y-3">
                       {sponsorItems.map((item, idx) => {
                         const Icon = item.icon;
                         return (
@@ -136,10 +136,10 @@ export default function RiskControlScreen1() {
                           >
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#0B1020]/[0.03] border border-[#0B1020]/10 cursor-pointer transition-all duration-200 hover:bg-[#0B1020]/[0.06] hover:border-[#0B1020]/20 hover:-translate-y-0.5 hover:shadow-md group">
-                                  <Icon className="h-4 w-4 text-[#0B1020]/50 group-hover:text-[#0B1020]/70 transition-colors" />
-                                  <span className="text-sm font-medium text-[#0B1020]/80">{item.label}</span>
-                                  <Info className="h-3 w-3 text-[#0B1020]/30 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#0B1020]/[0.03] border border-[#0B1020]/10 cursor-pointer transition-all duration-200 hover:bg-[#0B1020]/[0.06] hover:border-[#0B1020]/20 hover:-translate-y-0.5 hover:shadow-md group min-w-0">
+                                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#0B1020]/50 group-hover:text-[#0B1020]/70 transition-colors flex-shrink-0" />
+                                  <span className="text-xs sm:text-sm font-medium text-[#0B1020]/80 break-words min-w-0 flex-1">{item.label}</span>
+                                  <Info className="h-3 w-3 text-[#0B1020]/30 ml-auto opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                                 </div>
                               </TooltipTrigger>
                               <TooltipContent variant="light" side="right">
@@ -174,15 +174,15 @@ export default function RiskControlScreen1() {
                   </div>
 
                   {/* Lane B - LumiqAI adds */}
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 mb-6">
-                      <div className="h-2 w-2 rounded-full bg-blue-500/60" />
-                      <h3 className="text-sm font-bold text-[#0B1020]/80 uppercase tracking-wide">
+                  <div className="space-y-4 min-w-0">
+                    <div className="flex items-center gap-2 mb-4 sm:mb-6">
+                      <div className="h-2 w-2 rounded-full bg-blue-500/60 flex-shrink-0" />
+                      <h3 className="text-xs sm:text-sm font-bold text-[#0B1020]/80 uppercase tracking-wide break-words">
                         LumiqAI Adds Upstream
                       </h3>
                     </div>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-2.5 sm:space-y-3">
                       {lumiqItems.map((item, idx) => {
                         const Icon = item.icon;
                         return (
@@ -195,10 +195,10 @@ export default function RiskControlScreen1() {
                           >
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-50/50 border border-blue-200/50 cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-300/60 hover:-translate-y-0.5 hover:shadow-md group">
-                                  <Icon className="h-4 w-4 text-blue-600/60 group-hover:text-blue-600 transition-colors" />
-                                  <span className="text-sm font-medium text-[#0B1020]/80">{item.label}</span>
-                                  <Info className="h-3 w-3 text-blue-400/50 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <div className="flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-blue-50/50 border border-blue-200/50 cursor-pointer transition-all duration-200 hover:bg-blue-50 hover:border-blue-300/60 hover:-translate-y-0.5 hover:shadow-md group min-w-0">
+                                  <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-600/60 group-hover:text-blue-600 transition-colors flex-shrink-0" />
+                                  <span className="text-xs sm:text-sm font-medium text-[#0B1020]/80 break-words min-w-0 flex-1">{item.label}</span>
+                                  <Info className="h-3 w-3 text-blue-400/50 ml-auto opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
                                 </div>
                               </TooltipTrigger>
                               <TooltipContent variant="light" side="left">

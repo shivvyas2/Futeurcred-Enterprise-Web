@@ -135,7 +135,7 @@ export default function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="text-sm text-white opacity-90 font-medium mb-6">© FUTEURCREDX 2025</div>
+          <div className="text-sm text-white opacity-90 font-medium mb-6">© FUTEURCREDX 2026</div>
 
           {/* Legal Text */}
           <div className="text-xs text-white opacity-80 space-y-4 mb-8 font-medium">
@@ -152,7 +152,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="text-xs text-gray-500 mt-4">
-            © 2025 FUTEURCREDX.
+            © 2026 FUTEURCREDX.
             LUMIQ AI™ and FUTEURCREDX® are registered trademarks. All rights reserved. Building business credit, empowering growth.
           </div>
 

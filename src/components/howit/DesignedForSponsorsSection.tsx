@@ -4,6 +4,8 @@ import PremiumSectionShell from "./ui/PremiumSectionShell";
 import GlassCard from "./ui/GlassCard";
 import Chip from "./ui/Chip";
 import MockFrame from "./ui/MockFrame";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const sponsorCards = [
   {
@@ -132,6 +134,35 @@ export default function DesignedForSponsorsSection() {
         <p className="text-center text-[12px] text-white/50 mt-4">
           Every decision produces auditable reason codes visible to sponsors.
         </p>
+      </motion.div>
+
+      {/* CTA Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 14 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.65 }}
+        className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
+      >
+        <Button
+          size="lg"
+          className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl"
+          asChild
+        >
+          <Link to="/request-pilot">
+            Start Pilot
+          </Link>
+        </Button>
+        <Button
+          size="lg"
+          variant="outline"
+          className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white bg-transparent font-medium shadow-lg hover:shadow-xl"
+          asChild
+        >
+          <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="text-white">
+            View Docs
+          </a>
+        </Button>
       </motion.div>
 
       <style>{`

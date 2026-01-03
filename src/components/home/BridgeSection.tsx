@@ -496,7 +496,7 @@ export default function BridgeSection() {
                 </div>
 
                 {/* CTA row */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6 pt-5 border-t border-white/[0.08]">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-4 mt-6 pt-5 border-t border-white/[0.08]">
                   <div className="flex gap-3">
                     <Button
                       size="lg"
@@ -518,10 +518,12 @@ export default function BridgeSection() {
                       </a>
                     </Button>
                   </div>
-                  <p className="text-xs text-white/45">
-                    Typical integration: 1–2 weeks. No underwriting rewrite.
-                  </p>
                 </div>
+                
+                {/* Integration note */}
+                <p className="text-xs text-white/45 text-center mt-4">
+                  Typical integration: 1–2 weeks. No underwriting rewrite.
+                </p>
               </div>
             </div>
           </div>

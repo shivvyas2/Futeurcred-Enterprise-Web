@@ -58,7 +58,7 @@ export default function HomePage() {
                   asChild
                 >
                   <Link to="/request-pilot">
-                    Start Free Integration
+                    Request Pilot
                   </Link>
                 </Button>
                 <Button
@@ -222,7 +222,7 @@ const preQual = await lumiq.prequalify({
               asChild
             >
               <Link to="/request-pilot">
-                Start Free Integration
+                Request Pilot
               </Link>
             </Button>
             <Button
