@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion"
 import { TrendingUp, Shield, Activity, BarChart3, Users, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const valuePoints = [
   {
@@ -218,15 +219,23 @@ export function ProgressEngineSection() {
               <Button 
                 size="lg"
                 className="bg-slate-900 text-white px-7 py-3 text-[15px] font-semibold rounded-full hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20"
+                asChild
               >
-                Request Private Pilot
+                <Link to="/request-pilot">
+                  Request Private Pilot
+                </Link>
               </Button>
-              <button className="flex items-center gap-2 text-slate-700 font-medium text-[15px] hover:text-slate-900 transition-colors group">
+              <a 
+                href="https://docs.futeurcredx.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-slate-700 font-medium text-[15px] hover:text-slate-900 transition-colors group"
+              >
                 <span className="w-8 h-8 rounded-full border-2 border-slate-300 flex items-center justify-center group-hover:border-slate-400 transition-colors">
                   <BarChart3 className="w-4 h-4" />
                 </span>
                 View API Docs
-              </button>
+              </a>
             </motion.div>
           </motion.div>
           

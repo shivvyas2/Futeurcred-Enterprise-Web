@@ -39,7 +39,7 @@ export default function RiskAndControlPage() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/contact">
+          <Link to="/request-pilot">
             <Button
               size="lg"
               className="bg-white text-[#0B1020] px-8 py-4 text-base font-semibold rounded-full shadow-lg uppercase hover:bg-white/90 transition-colors"
@@ -48,7 +48,7 @@ export default function RiskAndControlPage() {
               Request Private Pilot
             </Button>
           </Link>
-          <Link to="/docs">
+          <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               variant="outline"
@@ -57,7 +57,7 @@ export default function RiskAndControlPage() {
               <FileText className="mr-2 h-5 w-5" />
               View API Docs
             </Button>
-          </Link>
+          </a>
         </div>
       </HeroBackground>
 
@@ -91,9 +91,12 @@ export default function RiskAndControlPage() {
           <Button
             size="lg"
             className="bg-white text-[#0B1020] px-10 py-4 text-lg font-semibold rounded-full shadow-lg uppercase hover:bg-white/90 transition-colors"
+            asChild
           >
-            <Icon name="rocket.svg" className="mr-3 h-6 w-6" width={24} height={24} />
-            Request a Private Pilot
+            <Link to="/request-pilot">
+              <Icon name="rocket.svg" className="mr-3 h-6 w-6" width={24} height={24} />
+              Request a Private Pilot
+            </Link>
           </Button>
           <p className="text-sm text-white/50 mt-6 font-medium">
             One platform per category.

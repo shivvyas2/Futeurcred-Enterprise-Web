@@ -9,6 +9,7 @@ import BridgeSection from "@/components/home/BridgeSection"
 import ProblemHookSection from "@/components/home/ProblemHookSection"
 import FintechScoreboardSection from "@/components/home/FintechScoreboardSection"
 import LumiqProductsSection from "@/components/home/LumiqProductsSection"
+import { Link } from "react-router-dom"
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
@@ -54,17 +55,23 @@ export default function HomePage() {
                 <Button
                   size="lg"
                   className="bg-white text-gray-900 hover:bg-white/90 px-8 py-4 text-base font-bold rounded-full"
+                  asChild
                 >
-                  <Icon name="speedometer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
-                  Start Free Integration
+                  <Link to="/request-pilot">
+                    <Icon name="speedometer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
+                    Start Free Integration
+                  </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
                   className="border border-white/20 text-white hover:bg-white/10 hover:text-white px-8 py-4 text-base font-medium bg-transparent rounded-full"
+                  asChild
                 >
-                  <Icon name="computer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
-                  View API Docs
+                  <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                    <Icon name="computer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
+                    View API Docs
+                  </a>
                 </Button>
               </div>
 
@@ -214,18 +221,24 @@ const preQual = await lumiq.prequalify({
             <Button
               size="lg"
               className="bg-white text-black px-10 py-4 text-lg font-semibold rounded-full shadow-lg uppercase"
+              asChild
             >
-              <Icon name="speedometer.svg" className="mr-3 h-6 w-6" width={24} height={24} />
-              Start Free Integration
-              <Icon name="paper plane.svg" className="ml-3 h-6 w-6" width={24} height={24} />
+              <Link to="/request-pilot">
+                <Icon name="speedometer.svg" className="mr-3 h-6 w-6" width={24} height={24} />
+                Start Free Integration
+                <Icon name="paper plane.svg" className="ml-3 h-6 w-6" width={24} height={24} />
+              </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-2 border-white/30 text-white hover:text-white px-8 py-4 text-lg rounded-full bg-transparent"
+              asChild
             >
-              <Icon name="computer.svg" className="mr-3 h-5 w-5" width={20} height={20} />
-              View Technical Docs
+              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+                <Icon name="computer.svg" className="mr-3 h-5 w-5" width={20} height={20} />
+                View Technical Docs
+              </a>
             </Button>
           </div>
         </div>

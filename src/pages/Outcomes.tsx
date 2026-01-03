@@ -45,7 +45,7 @@ export default function OutcomesPage() {
               Request Private Pilot
             </Button>
           </Link>
-          <Link to="/docs">
+          <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               variant="outline"
@@ -54,7 +54,7 @@ export default function OutcomesPage() {
               <FileText className="mr-2 h-5 w-5" />
               View API Docs
             </Button>
-          </Link>
+          </a>
         </div>
       </HeroBackground>
 

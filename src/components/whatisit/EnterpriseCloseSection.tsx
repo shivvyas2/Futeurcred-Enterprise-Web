@@ -4,6 +4,7 @@ import { motion, useReducedMotion, AnimatePresence } from "framer-motion"
 import { useState, useRef, useEffect } from "react"
 import { Shield, Activity, Eye } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 const valueItems = [
   { icon: Shield, text: "Underwriting lift without blind risk" },
@@ -102,15 +103,21 @@ function SuperCard() {
           <Button 
             size="lg"
             className="bg-white text-black px-6 py-3 text-[15px] font-semibold rounded-full hover:bg-white/90 transition-all"
+            asChild
           >
-            Request Private Pilot
+            <Link to="/request-pilot">
+              Request Private Pilot
+            </Link>
           </Button>
           <Button 
             variant="outline"
             size="lg"
             className="border-white/20 text-white px-6 py-3 text-[15px] font-medium rounded-full hover:bg-white/10 transition-all"
+            asChild
           >
-            View API Docs
+            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
+              View API Docs
+            </a>
           </Button>
         </div>
         

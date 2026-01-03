@@ -509,7 +509,7 @@ export default function BridgeSection() {
                       variant="outline"
                       className="border border-white/20 text-white hover:bg-white/10 hover:text-white px-5 py-2 text-sm font-medium bg-transparent rounded-full"
                     >
-                      <Link to="/docs">View Technical Docs</Link>
+                      <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">View Technical Docs</a>
                     </Button>
                   </div>
                   <p className="text-xs text-white/45">

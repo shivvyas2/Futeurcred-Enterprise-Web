@@ -9,6 +9,7 @@ import { ProgressEngineSection } from "@/components/whatisit/ProgressEngineSecti
 import { EnterpriseCloseSection } from "@/components/whatisit/EnterpriseCloseSection"
 import { ContactFormSection } from "@/components/whatisit/ContactFormSection"
 import { ArrowRight } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function WhatIsItPage() {
   return (
@@ -55,12 +56,17 @@ export default function WhatIsItPage() {
                 <Button 
                   size="lg" 
                   className="bg-white text-gray-900 hover:bg-white/90 font-semibold px-8 py-6 text-base rounded-full"
+                  asChild
                 >
-                  Request Private Pilot
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link to="/request-pilot">
+                    Request Private Pilot
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
                 <a 
-                  href="#" 
+                  href="https://docs.futeurcredx.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   className="text-white/70 hover:text-white text-sm font-medium transition-colors underline underline-offset-4"
                 >
                   View API Docs
