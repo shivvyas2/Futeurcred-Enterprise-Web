@@ -29,7 +29,7 @@ const accordionItems = [
       "Forced to leave for insights",
       "Graduates funded off-platform"
     ],
-    screenshot: null
+    screenshot: "/fintech Assets/Brex-denial.jpg"
   }
 ]
 
