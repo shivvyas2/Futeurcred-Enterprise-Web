@@ -497,19 +497,25 @@ export default function BridgeSection() {
 
                 {/* CTA row */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-6 pt-5 border-t border-white/[0.08]">
-                  <div className="flex gap-2">
+                  <div className="flex gap-3">
                     <Button
+                      size="lg"
+                      className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                       asChild
-                      className="bg-white text-gray-900 hover:bg-white/90 px-5 py-2 text-sm font-semibold rounded-full"
                     >
-                      <Link to="/request-pilot">Request a Pilot</Link>
+                      <Link to="/request-pilot" className="flex items-center gap-2.5">
+                        <span>Request a Pilot</span>
+                      </Link>
                     </Button>
                     <Button
-                      asChild
+                      size="lg"
                       variant="outline"
-                      className="border border-white/20 text-white hover:bg-white/10 hover:text-white px-5 py-2 text-sm font-medium bg-transparent rounded-full"
+                      className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-medium bg-transparent shadow-lg hover:shadow-xl"
+                      asChild
                     >
-                      <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">View Technical Docs</a>
+                      <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+                        <span>View Technical Docs</span>
+                      </a>
                     </Button>
                   </div>
                   <p className="text-xs text-white/45">

@@ -36,25 +36,27 @@ export default function OutcomesPage() {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/request-pilot">
-            <Button
-              size="lg"
-              className="bg-white text-[#0B1020] px-8 py-4 text-base font-semibold rounded-full shadow-lg uppercase hover:bg-white/90 transition-colors"
-            >
-              <Rocket className="mr-2 h-5 w-5" />
-              Request Private Pilot
-            </Button>
-          </Link>
-          <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white/30 text-white px-8 py-4 text-base font-semibold rounded-full uppercase hover:bg-white/10 transition-colors bg-white/5"
-            >
-              <FileText className="mr-2 h-5 w-5" />
-              View API Docs
-            </Button>
-          </a>
+          <Button
+            size="lg"
+            className="bg-white text-[#0B1020] font-semibold shadow-xl hover:shadow-2xl uppercase tracking-wide hover:bg-white/90"
+            asChild
+          >
+            <Link to="/request-pilot" className="flex items-center gap-2.5">
+              <Rocket className="h-5 w-5 flex-shrink-0" />
+              <span>Request Private Pilot</span>
+            </Link>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-2 border-white/30 text-white font-semibold uppercase tracking-wide hover:bg-white/10 hover:border-white/40 bg-white/5 shadow-lg hover:shadow-xl"
+            asChild
+          >
+            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+              <FileText className="h-5 w-5 flex-shrink-0" />
+              <span>View API Docs</span>
+            </a>
+          </Button>
         </div>
       </HeroBackground>
 

@@ -55,19 +55,19 @@ export default function WhatIsItPage() {
               <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Button 
                   size="lg" 
-                  className="bg-white text-gray-900 hover:bg-white/90 font-semibold px-8 py-6 text-base rounded-full"
+                  className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link to="/request-pilot">
-                    Request Private Pilot
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link to="/request-pilot" className="flex items-center gap-2.5">
+                    <span>Request Private Pilot</span>
+                    <ArrowRight className="h-4 w-4 flex-shrink-0" />
                   </Link>
                 </Button>
                 <a 
                   href="https://docs.futeurcredx.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-white/70 hover:text-white text-sm font-medium transition-colors underline underline-offset-4"
+                  className="text-white/70 hover:text-white text-sm font-medium transition-all duration-200 underline underline-offset-4 hover:underline-offset-2"
                 >
                   View API Docs
                 </a>

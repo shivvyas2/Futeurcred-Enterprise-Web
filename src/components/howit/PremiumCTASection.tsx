@@ -36,25 +36,27 @@ export default function PremiumCTASection() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/request-pilot">
-              <Button
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 font-semibold px-8 py-6 rounded-full text-base transition-all duration-200"
-              >
-                Request a Pilot
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
+            <Button
+              size="lg"
+              className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl"
+              asChild
+            >
+              <Link to="/request-pilot" className="flex items-center gap-2.5">
+                <span>Request a Pilot</span>
+                <ArrowRight className="w-4 h-4 flex-shrink-0" />
+              </Link>
+            </Button>
             
-            <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/5 hover:border-white/30 font-medium px-8 py-6 rounded-full text-base transition-all duration-200"
-              >
-                View Documentation
-              </Button>
-            </a>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white/20 text-white hover:bg-white/5 hover:border-white/30 font-medium shadow-lg hover:shadow-xl"
+              asChild
+            >
+              <a href="https://docs.futeurcredx.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+                <span>View Documentation</span>
+              </a>
+            </Button>
           </div>
 
           {/* Trust indicators */}

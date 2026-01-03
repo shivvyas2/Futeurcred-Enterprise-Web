@@ -301,22 +301,22 @@ export default function OutcomesScreen5() {
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
               <Button
                 size="lg"
-                className="bg-white text-[#0B1020] px-8 py-3 text-base font-semibold rounded-full shadow-lg hover:bg-white/90 transition-colors"
+                className="bg-white text-[#0B1020] font-semibold shadow-xl hover:shadow-2xl hover:bg-white/90"
                 asChild
               >
-                <Link to="/request-pilot">
-                  <Rocket className="mr-2 h-5 w-5" />
-                  Request a Private Pilot
+                <Link to="/request-pilot" className="flex items-center gap-2.5">
+                  <Rocket className="h-5 w-5 flex-shrink-0" />
+                  <span>Request a Private Pilot</span>
                 </Link>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/20 text-white/70 px-8 py-3 text-base font-semibold rounded-full hover:bg-white/5 hover:text-white transition-colors"
+                className="border-2 border-white/20 text-white/70 font-semibold hover:bg-white/5 hover:text-white hover:border-white/30 shadow-lg hover:shadow-xl"
                 asChild
               >
-                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
-                  Documentation
+                <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+                  <span>Documentation</span>
                 </a>
               </Button>
             </div>

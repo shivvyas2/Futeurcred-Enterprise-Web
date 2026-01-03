@@ -54,23 +54,23 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <Button
                   size="lg"
-                  className="bg-white text-gray-900 hover:bg-white/90 px-8 py-4 text-base font-bold rounded-full"
+                  className="bg-white text-gray-900 hover:bg-white/90 font-semibold shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <Link to="/request-pilot">
-                    <Icon name="speedometer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
-                    Start Free Integration
+                  <Link to="/request-pilot" className="flex items-center gap-2.5">
+                    <Icon name="speedometer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
+                    <span>Start Free Integration</span>
                   </Link>
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border border-white/20 text-white hover:bg-white/10 hover:text-white px-8 py-4 text-base font-medium bg-transparent rounded-full"
+                  className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 bg-transparent font-medium shadow-lg hover:shadow-xl"
                   asChild
                 >
-                  <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
-                    <Icon name="computer.svg" className="mr-2 h-5 w-5" width={20} height={20} />
-                    View API Docs
+                  <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+                    <Icon name="computer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
+                    <span>View API Docs</span>
                   </a>
                 </Button>
               </div>
@@ -217,27 +217,27 @@ const preQual = await lumiq.prequalify({
           <p className="text-lg text-white/80 mb-12">
             Join the fintechs already using LUMIQ AI to dominate their markets.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
             <Button
               size="lg"
-              className="bg-white text-black px-10 py-4 text-lg font-semibold rounded-full shadow-lg uppercase"
+              className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl uppercase tracking-wide"
               asChild
             >
-              <Link to="/request-pilot">
-                <Icon name="speedometer.svg" className="mr-3 h-6 w-6" width={24} height={24} />
-                Start Free Integration
-                <Icon name="paper plane.svg" className="ml-3 h-6 w-6" width={24} height={24} />
+              <Link to="/request-pilot" className="flex items-center gap-3">
+                <Icon name="speedometer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
+                <span>Start Free Integration</span>
+                <Icon name="paper plane.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
               </Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white/30 text-white hover:text-white px-8 py-4 text-lg rounded-full bg-transparent"
+              className="border-2 border-white/30 text-white hover:bg-white/10 hover:border-white/40 bg-transparent font-medium shadow-lg hover:shadow-xl"
               asChild
             >
-              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer">
-                <Icon name="computer.svg" className="mr-3 h-5 w-5" width={20} height={20} />
-                View Technical Docs
+              <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5">
+                <Icon name="computer.svg" className="h-5 w-5 flex-shrink-0" width={20} height={20} />
+                <span>View Technical Docs</span>
               </a>
             </Button>
           </div>
