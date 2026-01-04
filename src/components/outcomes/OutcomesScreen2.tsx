@@ -1,6 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Magnet, Eye, Unlock, TrendingUp, RotateCw, MessageSquare, BarChart3, Home, Lock } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const gravityStack = [
   { 
@@ -413,6 +415,35 @@ export default function OutcomesScreen2() {
               <span className="text-xs font-medium text-white/60">Identity lock-in: progress stays visible</span>
             </div>
           </div>
+        </motion.div>
+
+        {/* CTA Buttons */}
+        <motion.div
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12"
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+        >
+          <Button
+            size="lg"
+            className="bg-white text-black hover:bg-white/90 font-semibold shadow-xl hover:shadow-2xl"
+            asChild
+          >
+            <Link to="/request-pilot">
+              Start Pilot
+            </Link>
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/30 hover:text-white bg-transparent font-medium shadow-lg hover:shadow-xl"
+            asChild
+          >
+            <a href="https://docs.futeurcredx.com" target="_blank" rel="noopener noreferrer" className="text-white">
+              View Docs
+            </a>
+          </Button>
         </motion.div>
       </div>
     </section>

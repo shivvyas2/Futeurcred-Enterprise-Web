@@ -188,7 +188,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
             />
           )}
 
-          <div className="relative z-10 p-6 h-full flex flex-col">
+          <div className="relative z-10 p-7 sm:p-8 h-full flex flex-col">
             {/* Logo in glass pill */}
             <div className="flex items-center gap-4 mb-6">
               <motion.div 
@@ -265,7 +265,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
 
             {/* Metrics */}
             <div className="space-y-3 mt-auto">
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5">
                 <div className="flex items-center justify-between">
                   <span className="text-white/60 text-sm">{data.currentMetric}</span>
                   <span className="text-white font-bold">{data.currentValue} → {data.projectedValue}</span>
@@ -273,7 +273,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
                 <div className="text-emerald-400 text-sm font-medium mt-1">{data.improvement} improvement</div>
               </div>
               
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-5 text-center">
                 <div className="text-2xl font-bold text-white">{data.additionalARR}</div>
                 <div className="text-white/50 text-sm">additional ARR potential</div>
               </div>
@@ -300,7 +300,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
           }}
           onClick={handleClick}
         >
-          <div className="relative z-10 p-6 h-full flex flex-col">
+          <div className="relative z-10 p-7 sm:p-8 h-full flex flex-col">
             {/* Console header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -313,11 +313,11 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
             </div>
 
             {/* Depth items */}
-            <div className="space-y-2 mb-4 flex-1">
+            <div className="space-y-2.5 mb-4 flex-1">
               {underwritingDepthItems.map((item, i) => (
                 <motion.div
                   key={i}
-                  className="flex items-center gap-3 p-2 rounded-lg bg-white/5 border border-white/10"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isExpanded ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.1 + 0.3 }}

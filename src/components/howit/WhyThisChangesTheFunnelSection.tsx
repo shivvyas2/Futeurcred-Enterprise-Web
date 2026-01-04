@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { XCircle, CheckCircle } from "lucide-react";
+import { XCircle, CheckCircle, Clock, Users } from "lucide-react";
 import PremiumSectionShell from "./ui/PremiumSectionShell";
 import GlassCard from "./ui/GlassCard";
 
@@ -92,28 +92,105 @@ export default function WhyThisChangesTheFunnelSection() {
           {/* Funnel Visualization */}
           <div className="mb-8">
             <div className="flex items-end justify-center gap-4 md:gap-8 h-[120px] md:h-[160px]">
-              {funnelStages.map((stage, i) => (
-                <div key={stage.label} className="flex flex-col items-center gap-2 flex-1 max-w-[160px]">
-                  <motion.div
-                    animate={{ 
-                      width: currentWidths[i],
-                      backgroundColor: activeTab === "with" 
-                        ? "rgba(255,255,255,0.12)" 
-                        : "rgba(255,255,255,0.05)"
-                    }}
-                    transition={{ 
-                      type: shouldReduceMotion ? "tween" : "spring", 
-                      stiffness: 120, 
-                      damping: 20 
-                    }}
-                    className="h-16 md:h-24 rounded-xl border border-white/10"
-                    style={{ minWidth: "40px" }}
-                  />
-                  <span className="text-[11px] md:text-xs text-white/60 font-medium uppercase tracking-wider">
-                    {stage.label}
-                  </span>
-                </div>
-              ))}
+              {funnelStages.map((stage, i) => {
+                const isApplicants = stage.label === "Applicants";
+                const isDecisions = stage.label === "Decisions";
+                const isRetained = stage.label === "Retained";
+                const showLogo = isApplicants || isDecisions || isRetained;
+                
+                // Get the appropriate SVG image for each stage
+                let svgPath = "";
+                if (isApplicants) {
+                  svgPath = "/male-applicants-for-a-job-svgrepo-com.svg";
+                } else if (isDecisions) {
+                  svgPath = "/man-with-business-graphic-svgrepo-com.svg";
+                } else if (isRetained) {
+                  svgPath = "/presenter-talking-about-people-on-a-screen-svgrepo-com.svg";
+                }
+                
+                return (
+                  <div key={stage.label} className="flex flex-col items-center gap-2 flex-1 max-w-[160px]">
+                    <motion.div
+                      animate={{ 
+                        width: "100%",
+                        backgroundColor: activeTab === "with" 
+                          ? "rgba(255,255,255,0.12)" 
+                          : "rgba(255,255,255,0.05)"
+                      }}
+                      transition={{ 
+                        type: shouldReduceMotion ? "tween" : "spring", 
+                        stiffness: 120, 
+                        damping: 20 
+                      }}
+                      className="h-16 md:h-24 rounded-xl border border-white/10 relative overflow-hidden flex items-center justify-center"
+                      style={{ minWidth: "40px" }}
+                    >
+                      {/* Inner bar showing the actual percentage */}
+                      <motion.div
+                        className="absolute bottom-0 left-0 h-full rounded-xl"
+                        animate={{ 
+                          width: currentWidths[i],
+                          backgroundColor: activeTab === "with" 
+                            ? "rgba(255,255,255,0.15)" 
+                            : "rgba(255,255,255,0.08)"
+                        }}
+                        transition={{ 
+                          type: shouldReduceMotion ? "tween" : "spring", 
+                          stiffness: 120, 
+                          damping: 20 
+                        }}
+                      />
+                      {/* SVG image inside the bar */}
+                      {showLogo && svgPath && (
+                        <div className="absolute inset-0 flex items-center justify-center z-10 p-2">
+                          <img 
+                            src={svgPath} 
+                            alt={stage.label}
+                            className="w-full h-full object-contain opacity-70 filter brightness-0 invert"
+                            style={{ maxWidth: "80%", maxHeight: "80%" }}
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Progress bar overlay showing comparison */}
+                      {showLogo && activeTab === "with" && (
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-400/60 rounded-b-xl z-0"
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 0.8, delay: 0.3 }}
+                        />
+                      )}
+                    </motion.div>
+                    
+                    {/* Progress comparison indicator */}
+                    {showLogo && (
+                      <div className="w-full mt-1">
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <span className="text-[9px] text-white/40">Without</span>
+                          <span className="text-[9px] text-white/40">With</span>
+                        </div>
+                        <div className="relative h-1.5 bg-white/5 rounded-full overflow-hidden">
+                          <div 
+                            className="absolute left-0 top-0 bottom-0 bg-white/20 rounded-full"
+                            style={{ width: stage.withoutWidth }}
+                          />
+                          <motion.div
+                            className="absolute left-0 top-0 bottom-0 bg-emerald-400/60 rounded-full"
+                            initial={{ width: "0%" }}
+                            animate={{ width: activeTab === "with" ? stage.withWidth : "0%" }}
+                            transition={{ duration: 0.6, delay: 0.2 }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                    
+                    <span className="text-[11px] md:text-xs text-white/60 font-medium uppercase tracking-wider">
+                      {stage.label}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Animated connector line */}

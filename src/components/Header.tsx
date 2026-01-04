@@ -122,13 +122,16 @@ export default function Header() {
       }`}>
         <header className="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
           {/* Logo */}
-          <div className="flex items-center h-12 overflow-hidden">
-            <Link to="/" className="cursor-pointer block h-full flex items-center">
+          <div className="flex items-center h-12 overflow-hidden gap-3">
+            <Link to="/" className="cursor-pointer block h-full flex items-center gap-3">
               <img 
                 src="/Lumiqailogo.png" 
                 alt="Lumiqai Logo" 
                 className="transition-opacity hover:opacity-80 object-contain h-full w-auto max-h-12"
               />
+              <span className={`hidden sm:block text-sm font-medium whitespace-nowrap ${getTextColor()}`}>
+                LumiqAI - Enterprise Solutions by FuteurCredx
+              </span>
             </Link>
           </div>
 
