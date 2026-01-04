@@ -101,58 +101,122 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [certainty, setCertainty] = useState(0)
   const cardRef = useRef<HTMLDivElement>(null)
+  const isAnimatingRef = useRef(false)
+  const certaintyIntervalRef = useRef<NodeJS.Timeout | null>(null)
   const isInView = useInView(cardRef, { once: true, amount: 0.3 })
+
+  const animateCertainty = () => {
+    // Clear any existing interval
+    if (certaintyIntervalRef.current) {
+      clearInterval(certaintyIntervalRef.current)
+    }
+    
+    let current = 0
+    const target = 78 + index * 5
+    certaintyIntervalRef.current = setInterval(() => {
+      current += 2
+      if (current >= target) {
+        setCertainty(target)
+        if (certaintyIntervalRef.current) {
+          clearInterval(certaintyIntervalRef.current)
+          certaintyIntervalRef.current = null
+        }
+      } else {
+        setCertainty(current)
+      }
+    }, 20)
+  }
+
+  const handleMouseEnter = () => {
+    if (isAnimatingRef.current || isExpanded) return
+    
+    isAnimatingRef.current = true
+    setIsExpanded(true)
+    setIsHovered(true)
+    animateCertainty()
+    
+    // Allow animation to complete
+    setTimeout(() => {
+      isAnimatingRef.current = false
+    }, 450)
+  }
+
+  const handleMouseLeave = () => {
+    if (isAnimatingRef.current || !isExpanded) return
+    
+    isAnimatingRef.current = true
+    setIsExpanded(false)
+    setIsHovered(false)
+    setCertainty(0)
+    
+    // Clear certainty animation
+    if (certaintyIntervalRef.current) {
+      clearInterval(certaintyIntervalRef.current)
+      certaintyIntervalRef.current = null
+    }
+    
+    // Allow animation to complete
+    setTimeout(() => {
+      isAnimatingRef.current = false
+    }, 450)
+  }
 
   const handleClick = () => {
     setIsExpanded(!isExpanded)
     if (!isExpanded) {
-      // Animate certainty dial
-      let current = 0
-      const target = 78 + index * 5
-      const interval = setInterval(() => {
-        current += 2
-        if (current >= target) {
-          setCertainty(target)
-          clearInterval(interval)
-        } else {
-          setCertainty(current)
-        }
-      }, 20)
+      animateCertainty()
+    } else {
+      setCertainty(0)
     }
   }
 
   return (
     <motion.div
       ref={cardRef}
-      className="relative perspective-1000"
+      className="relative"
+      style={{ perspective: "1000px" }}
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.6, delay: index * 0.15 }}
     >
-      {/* Card container with flip capability */}
-      <motion.div
-        className={`relative w-full transition-all duration-500 ${isExpanded ? "min-h-[520px]" : "min-h-[380px]"}`}
-        style={{ transformStyle: "preserve-3d" }}
-        animate={{ rotateY: isExpanded ? 180 : 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+      {/* Stable hover area wrapper - maintains consistent size */}
+      <div
+        className="relative w-full"
+        style={{ minHeight: "650px" }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Front Face - Layer A & B */}
+        {/* Card container with flip capability */}
         <motion.div
-          className={`absolute inset-0 rounded-2xl overflow-hidden transition-all duration-300 ${
-            isHovered ? "border-white/30" : "border-white/10"
-          } border`}
+          className={`relative w-full ${isExpanded ? "min-h-[600px] md:min-h-[650px]" : "min-h-[380px]"}`}
           style={{ 
-            backfaceVisibility: "hidden",
-            background: "rgba(255,255,255,0.03)",
-            backdropFilter: "blur(12px)",
-            boxShadow: isHovered 
-              ? "0 40px 90px -20px rgba(255,255,255,0.1)" 
-              : "0 20px 60px -20px rgba(0,0,0,0.5)"
+            transformStyle: "preserve-3d",
+            perspective: "1000px"
           }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={handleClick}
+          animate={{ rotateY: isExpanded ? 180 : 0 }}
+          transition={{ 
+            duration: 0.4, 
+            ease: [0.4, 0, 0.2, 1],
+            type: "tween"
+          }}
         >
+          {/* Front Face - Layer A & B */}
+          <motion.div
+            className={`absolute inset-0 rounded-2xl overflow-hidden transition-all duration-300 ${
+              isHovered ? "border-white/30" : "border-white/10"
+            } border`}
+            style={{ 
+              backfaceVisibility: "hidden",
+              WebkitBackfaceVisibility: "hidden",
+              transform: "rotateY(0deg)",
+              background: "rgba(255,255,255,0.03)",
+              backdropFilter: "blur(12px)",
+              boxShadow: isHovered 
+                ? "0 40px 90px -20px rgba(255,255,255,0.1)" 
+                : "0 20px 60px -20px rgba(0,0,0,0.5)"
+            }}
+            onClick={handleClick}
+          >
           {/* Noise grain overlay */}
           <div 
             className="absolute inset-0 opacity-[0.08] pointer-events-none z-0"
@@ -294,13 +358,14 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
           className="absolute inset-0 rounded-2xl overflow-hidden border border-white/20"
           style={{ 
             backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
             background: "linear-gradient(135deg, rgba(16,185,129,0.1) 0%, rgba(0,0,0,0.9) 100%)",
             backdropFilter: "blur(12px)"
           }}
           onClick={handleClick}
         >
-          <div className="relative z-10 p-7 sm:p-8 h-full flex flex-col">
+          <div className="relative z-10 p-7 sm:p-8 h-full flex flex-col pb-10 sm:pb-12">
             {/* Console header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -313,24 +378,24 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
             </div>
 
             {/* Depth items */}
-            <div className="space-y-2.5 mb-4 flex-1">
+            <div className="space-y-2 mb-4">
               {underwritingDepthItems.map((item, i) => (
                 <motion.div
                   key={i}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-white/5 border border-white/10"
+                  className="flex items-center gap-2.5 p-2.5 rounded-lg bg-white/5 border border-white/10"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isExpanded ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.1 + 0.3 }}
                 >
-                  <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span className="text-white text-sm font-medium">{item.label}</span>
-                  <span className="text-white/50 text-xs ml-auto">→ {item.description}</span>
+                  <div className="w-2 h-2 rounded-full bg-emerald-400 flex-shrink-0" />
+                  <span className="text-white text-xs sm:text-sm font-medium flex-1 min-w-0">{item.label}</span>
+                  <span className="text-white/50 text-[10px] sm:text-xs ml-auto flex-shrink-0">→ {item.description}</span>
                 </motion.div>
               ))}
             </div>
 
             {/* Certainty Dial */}
-            <div className="relative flex items-center justify-center mb-4">
+            <div className="relative flex items-center justify-center mb-3">
               <div className="relative w-24 h-24">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
                   <circle
@@ -359,7 +424,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
             </div>
 
             {/* KPI Bars */}
-            <div className="space-y-3">
+            <div className="space-y-2.5 mt-auto">
               {/* Drop-off Reduction */}
               <div className="group relative">
                 <div className="flex items-center justify-between text-xs mb-1">
@@ -424,6 +489,7 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
           </div>
         </motion.div>
       </motion.div>
+      </div>
     </motion.div>
   )
 }
