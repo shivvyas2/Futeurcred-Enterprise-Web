@@ -15,14 +15,14 @@ const PilotRequestSchema = z.object({
   lastName: z.string().min(1, 'Last name is required').max(50, 'Last name too long').trim(),
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name too long').trim(),
   companyEmail: z.string().email('Invalid email format').max(100, 'Email too long'),
-  phone: z.string().max(20, 'Phone number too long').optional().or(z.literal('')),
+  phone: z.string().max(20, 'Phone number too long').optional().default(''),
   useCase: z.enum(
     ['credit-decisioning', 'pre-qualification', 'risk-assessment', 'revenue-optimization', 'other'],
     { errorMap: () => ({ message: 'Invalid use case selected' }) }
   ),
   message: z.string().min(1, 'Message is required').max(2000, 'Message too long').trim(),
   // Honeypot field - should always be empty if submitted by a human
-  website: z.string().max(0, 'Bot detected').optional().or(z.literal('')),
+  website: z.string().max(0, 'Bot detected').optional().default(''),
 });
 
 // Simple in-memory rate limiting (resets on function restart)
@@ -131,7 +131,9 @@ export default async function handler(req: Request): Promise<Response> {
         message: e.message,
       }));
       console.warn('Validation failed:', errors);
-      return new Response(JSON.stringify({ error: 'Validation failed', details: errors }), {
+      // Return the first error message for better UX
+      const firstError = errors[0]?.message || 'Validation failed';
+      return new Response(JSON.stringify({ error: firstError, details: errors }), {
         status: 400,
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
       });

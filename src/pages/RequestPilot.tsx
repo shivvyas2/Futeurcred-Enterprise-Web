@@ -35,6 +35,15 @@ export default function RequestPilot() {
       const data = await response.json();
 
       if (!response.ok) {
+        // Show more specific error messages
+        if (data.details && Array.isArray(data.details) && data.details.length > 0) {
+          const errorMessages = data.details.map((err: any) => {
+            const field = err.field || '';
+            const message = err.message || '';
+            return field ? `${field}: ${message}` : message;
+          }).join(', ');
+          throw new Error(errorMessages || data.error || "Failed to submit your request");
+        }
         throw new Error(data.error || "Failed to submit your request");
       }
 
