@@ -15,14 +15,20 @@ const PilotRequestSchema = z.object({
   lastName: z.string().min(1, 'Last name is required').max(50, 'Last name too long').trim(),
   companyName: z.string().min(1, 'Company name is required').max(100, 'Company name too long').trim(),
   companyEmail: z.string().email('Invalid email format').max(100, 'Email too long'),
-  phone: z.string().max(20, 'Phone number too long').optional().default(''),
+  phone: z.preprocess(
+    (val) => val === '' || val === null || val === undefined ? '' : String(val),
+    z.string().max(20, 'Phone number too long')
+  ),
   useCase: z.enum(
     ['credit-decisioning', 'pre-qualification', 'risk-assessment', 'revenue-optimization', 'other'],
     { errorMap: () => ({ message: 'Invalid use case selected' }) }
   ),
   message: z.string().min(1, 'Message is required').max(2000, 'Message too long').trim(),
   // Honeypot field - should always be empty if submitted by a human
-  website: z.string().max(0, 'Bot detected').optional().default(''),
+  website: z.preprocess(
+    (val) => val === '' || val === null || val === undefined ? '' : String(val),
+    z.string().max(0, 'Bot detected')
+  ),
 });
 
 // Simple in-memory rate limiting (resets on function restart)
@@ -116,7 +122,9 @@ export default async function handler(req: Request): Promise<Response> {
     let rawData: unknown;
     try {
       rawData = await req.json();
-    } catch {
+      console.log('Received raw data:', JSON.stringify(rawData, null, 2));
+    } catch (parseError: any) {
+      console.error('JSON parse error:', parseError);
       return new Response(JSON.stringify({ error: 'Invalid JSON body' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json', ...corsHeaders },
@@ -129,8 +137,10 @@ export default async function handler(req: Request): Promise<Response> {
       const errors = validationResult.error.errors.map((e) => ({
         field: e.path.join('.'),
         message: e.message,
+        code: e.code,
       }));
-      console.warn('Validation failed:', errors);
+      console.error('Validation failed:', JSON.stringify(errors, null, 2));
+      console.error('Validation error details:', validationResult.error);
       // Return the first error message for better UX
       const firstError = errors[0]?.message || 'Validation failed';
       return new Response(JSON.stringify({ error: firstError, details: errors }), {
@@ -159,16 +169,27 @@ export default async function handler(req: Request): Promise<Response> {
       ip: clientIP,
     });
 
+    // Check if Resend API key is configured
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not configured');
+      return new Response(JSON.stringify({ error: 'Email service is not configured. Please contact support.' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      });
+    }
+
     // Escape HTML in user-provided content for email safety
     const safeFirstName = escapeHtml(data.firstName);
     const safeLastName = escapeHtml(data.lastName);
     const safeCompanyName = escapeHtml(data.companyName);
     const safeCompanyEmail = escapeHtml(data.companyEmail);
-    const safePhone = data.phone ? escapeHtml(data.phone) : null;
+    const safePhone = data.phone && data.phone.trim() ? escapeHtml(data.phone) : null;
     const safeUseCase = escapeHtml(data.useCase);
     const safeMessage = escapeHtml(data.message);
 
     // Send notification email to Sean
+    // Update the 'from' email to use your verified Resend domain
+    // Options: 'onboarding@resend.dev' (default), 'noreply@aerexewila.resend.app', or your custom domain
     const notificationEmail = await resend.emails.send({
       from: 'LumiqAI <onboarding@resend.dev>',
       to: ['sean@futeurcredx.com'],
@@ -224,6 +245,7 @@ export default async function handler(req: Request): Promise<Response> {
     console.log('Notification email sent:', notificationEmail);
 
     // Send confirmation email to the requester
+    // Update the 'from' email to use your verified Resend domain
     const confirmationEmail = await resend.emails.send({
       from: 'LumiqAI <onboarding@resend.dev>',
       to: [data.companyEmail],
@@ -276,8 +298,17 @@ export default async function handler(req: Request): Promise<Response> {
     });
   } catch (error: any) {
     console.error('Error in send-pilot-request function:', error);
-    // Return generic error to client (don't leak internal details)
-    return new Response(JSON.stringify({ error: 'An unexpected error occurred. Please try again.' }), {
+    console.error('Error details:', {
+      message: error?.message,
+      stack: error?.stack,
+      name: error?.name,
+    });
+    // Return more helpful error message for debugging (remove in production if needed)
+    const errorMessage = error?.message || 'An unexpected error occurred. Please try again.';
+    return new Response(JSON.stringify({ 
+      error: errorMessage,
+      details: process.env.NODE_ENV === 'development' ? error?.stack : undefined
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json', ...corsHeaders },
     });
