@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Send, Rocket, Building2, Mail, User, MessageSquare, Phone, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroBackground from "@/components/HeroBackground";
+import emailjs from "@emailjs/browser";
 
 export default function RequestPilot() {
   const [formData, setFormData] = useState({
@@ -23,34 +24,39 @@ export default function RequestPilot() {
     setIsSubmitting(true);
     setError(null);
 
+    // Check honeypot field - if filled, it's likely a bot
+    if (formData.website && formData.website.length > 0) {
+      // Silently fail for bots
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch("/api/send-pilot-request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      // Prepare template parameters
+      const templateParams = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        companyName: formData.companyName,
+        companyEmail: formData.companyEmail,
+        phone: formData.phone || "", // Optional field
+        useCase: formData.useCase,
+        message: formData.message,
+        time: new Date().toLocaleString(), // Current date/time
+      };
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        // Show more specific error messages
-        if (data.details && Array.isArray(data.details) && data.details.length > 0) {
-          const errorMessages = data.details.map((err: any) => {
-            const field = err.field || '';
-            const message = err.message || '';
-            return field ? `${field}: ${message}` : message;
-          }).join(', ');
-          throw new Error(errorMessages || data.error || "Failed to submit your request");
-        }
-        throw new Error(data.error || "Failed to submit your request");
-      }
+      // Send email using EmailJS
+      await emailjs.send(
+        "service_zo3597t", // Service ID
+        "template_8568glv", // Template ID
+        templateParams,
+        "ROloA61OoR2iNley2" // Public Key
+      );
 
       setIsSubmitted(true);
     } catch (err: any) {
       console.error("Error submitting form:", err);
-      setError(err.message || "Failed to submit your request. Please try again.");
+      setError(err.text || err.message || "Failed to submit your request. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
