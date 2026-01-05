@@ -182,13 +182,13 @@ function FintechCard({ data, index }: { data: FintechData; index: number }) {
       {/* Stable hover area wrapper - maintains consistent size */}
       <div
         className="relative w-full"
-        style={{ minHeight: "650px" }}
+        style={{ minHeight: "700px" }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         {/* Card container with flip capability */}
         <motion.div
-          className={`relative w-full ${isExpanded ? "min-h-[600px] md:min-h-[650px]" : "min-h-[380px]"}`}
+          className={`relative w-full ${isExpanded ? "min-h-[650px] md:min-h-[700px]" : "min-h-[480px] md:min-h-[520px]"}`}
           style={{ 
             transformStyle: "preserve-3d",
             perspective: "1000px"
