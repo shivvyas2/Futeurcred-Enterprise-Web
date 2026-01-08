@@ -135,7 +135,7 @@ const signalData = [
 const DetailRow = ({ label, value }: { label: string; value: string }) => (
   <div className="flex flex-col gap-1 py-2 border-b border-black/5 last:border-b-0">
     <span className="text-[10px] uppercase tracking-wider text-black/40 font-medium">{label}</span>
-    <span className="text-sm text-black/80">{value}</span>
+    <span className="text-xs md:text-sm text-black/80 break-words">{value}</span>
   </div>
 );
 
@@ -166,8 +166,8 @@ const StageCard = ({
       transition={{ delay: index * 0.08, duration: 0.5 }}
       onClick={onClick}
       className={`
-        relative w-full text-left p-4 md:p-5 rounded-2xl border bg-white
-        transition-all duration-300 cursor-pointer
+        relative w-full text-left p-3 md:p-4 lg:p-5 rounded-2xl border bg-white
+        transition-all duration-300 cursor-pointer min-w-0 overflow-hidden
         ${isActive 
           ? 'border-black/20 shadow-md scale-[1.02]' 
           : 'border-black/10 hover:border-black/15 hover:shadow-sm'
@@ -191,13 +191,13 @@ const StageCard = ({
       </div>
 
       {/* Content */}
-      <div className="ml-2">
-        <h4 className="text-lg font-semibold text-black mb-2">{stage.title}</h4>
+      <div className="ml-2 min-w-0">
+        <h4 className="text-base md:text-lg font-semibold text-black mb-2 break-words">{stage.title}</h4>
         <ul className="space-y-1">
           {stage.bullets.map((bullet, i) => (
-            <li key={i} className="text-sm text-black/60 flex items-center gap-2">
-              <span className="w-1 h-1 rounded-full bg-black/30 flex-shrink-0" />
-              {bullet}
+            <li key={i} className="text-xs md:text-sm text-black/60 flex items-start gap-2">
+              <span className="w-1 h-1 rounded-full bg-black/30 flex-shrink-0 mt-1.5" />
+              <span className="break-words">{bullet}</span>
             </li>
           ))}
         </ul>
@@ -256,7 +256,7 @@ const DetailPanel = ({
           <h5 className="text-xs uppercase tracking-wider text-black/40 font-medium mb-2">What We Observe</h5>
           <div className="flex flex-wrap gap-2">
             {stage.details.observe.map((item, i) => (
-              <span key={i} className="inline-flex items-center px-3 py-1.5 rounded-full bg-black/5 border border-black/10 text-black/70 text-sm">
+              <span key={i} className="inline-flex items-center px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-black/5 border border-black/10 text-black/70 text-xs md:text-sm break-words">
                 {item}
               </span>
             ))}
@@ -268,7 +268,7 @@ const DetailPanel = ({
           <h5 className="text-xs uppercase tracking-wider text-black/40 font-medium mb-2">What We Output</h5>
           <div className="flex flex-wrap gap-2">
             {stage.details.output.map((item, i) => (
-              <span key={i} className="inline-flex items-center px-3 py-1.5 rounded-full bg-black/5 border border-black/10 text-black/70 text-sm">
+              <span key={i} className="inline-flex items-center px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-black/5 border border-black/10 text-black/70 text-xs md:text-sm break-words">
                 {item}
               </span>
             ))}
@@ -282,7 +282,7 @@ const DetailPanel = ({
         </div>
 
         {/* Expanded Details - replaces screenshot slot */}
-        <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-4 mt-4">
+        <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-3 md:p-4 mt-4">
           <h5 className="text-xs uppercase tracking-wider text-black/50 font-medium mb-3">Deep Dive</h5>
           <div className="space-y-0">
             {expandedKeys.filter(k => k !== "insight").map((key) => {
@@ -300,7 +300,7 @@ const DetailPanel = ({
           
           {/* Sharp one-liner insight */}
           <div className="mt-4 pt-3 border-t border-black/10">
-            <p className="text-sm text-black/70 italic leading-relaxed">
+            <p className="text-xs md:text-sm text-black/70 italic leading-relaxed break-words">
               {stage.details.expanded.insight}
             </p>
           </div>
@@ -332,12 +332,12 @@ const DiagramNode = ({ label, icon: Icon, delay }: { label: string; icon: React.
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true }}
     transition={{ delay: delay * 0.1, duration: 0.4 }}
-    className="flex flex-col items-center gap-2"
+    className="flex flex-col items-center gap-2 w-full min-w-0"
   >
-    <div className="w-16 h-16 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center">
-      <Icon className="w-6 h-6 text-black/70" />
+    <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-2xl bg-black/5 border border-black/10 flex items-center justify-center flex-shrink-0">
+      <Icon className="w-5 h-5 md:w-6 md:h-6 text-black/70" />
     </div>
-    <span className="text-sm text-black/60 text-center font-medium">{label}</span>
+    <span className="text-xs md:text-sm text-black/60 text-center font-medium break-words px-1">{label}</span>
   </motion.div>
 );
 
@@ -365,16 +365,16 @@ export default function OperatingLoopSection() {
   const activeStageData = stages.find(s => s.id === activeStage)!;
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section className="relative py-20 overflow-hidden w-full">
       {/* Canvas Island Container */}
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <Card className="relative rounded-[32px] border border-black/10 bg-white/90 backdrop-blur-md shadow-[0_30px_120px_rgba(0,0,0,0.35)] p-8 md:p-12 overflow-hidden">
+          <Card className="relative rounded-[32px] border border-black/10 bg-white/90 backdrop-blur-md shadow-[0_30px_120px_rgba(0,0,0,0.35)] p-4 md:p-8 lg:p-12 overflow-hidden w-full">
             {/* Grid pattern overlay */}
             <div 
               className="absolute inset-0 opacity-40 pointer-events-none"
@@ -415,10 +415,10 @@ export default function OperatingLoopSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.12, duration: 0.6 }}
-                className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 items-stretch mb-8"
+                className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6 items-start mb-8"
               >
                 {/* Loop Map Card */}
-                <Card className="relative rounded-3xl border border-black/10 bg-white shadow-sm p-6 md:p-8 overflow-hidden">
+                <Card className="relative rounded-3xl border border-black/10 bg-white shadow-sm p-4 md:p-6 lg:p-8 overflow-hidden w-full">
                   {/* Spotlight */}
                   <div className="absolute inset-0 bg-[radial-gradient(closest-side_at_50%_30%,rgba(0,0,0,0.04),transparent_70%)] pointer-events-none" />
                   
@@ -426,7 +426,7 @@ export default function OperatingLoopSection() {
                   <StageConnector shouldReduceMotion={shouldReduceMotion} />
                   
                   {/* Clean 3x2 Grid for all screen sizes */}
-                  <div className="relative z-10 grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+                  <div className="relative z-10 grid grid-cols-2 lg:grid-cols-3 gap-2 md:gap-3 lg:gap-4 w-full">
                     {stages.map((stage, index) => (
                       <StageCard
                         key={stage.id}
@@ -442,16 +442,18 @@ export default function OperatingLoopSection() {
                 </Card>
 
                 {/* Detail Panel Card */}
-                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-6 md:p-8">
+                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-4 md:p-6 lg:p-8 w-full overflow-hidden">
                   {/* Header */}
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
                     <h4 className="text-sm uppercase tracking-wider text-black/50 font-medium">Stage Details</h4>
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-black text-white text-xs font-medium">
+                    <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-black text-white text-xs font-medium flex-shrink-0">
                       Stage 0{activeStage}
                     </span>
                   </div>
                   
-                  <DetailPanel stage={activeStageData} shouldReduceMotion={shouldReduceMotion} />
+                  <div className="overflow-y-auto max-h-[600px]">
+                    <DetailPanel stage={activeStageData} shouldReduceMotion={shouldReduceMotion} />
+                  </div>
                 </Card>
               </motion.div>
 
@@ -461,10 +463,10 @@ export default function OperatingLoopSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.24, duration: 0.6 }}
-                className="mb-8"
+                className="mb-8 w-full"
               >
-                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-8 md:p-10 relative overflow-hidden">
-                  <h3 className="text-xl md:text-2xl font-semibold text-black text-center">
+                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-4 md:p-8 lg:p-10 relative overflow-hidden w-full">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black text-center break-words">
                     Underwriting Starts With Signals
                   </h3>
 
@@ -472,29 +474,29 @@ export default function OperatingLoopSection() {
                   <div className="relative mt-8">
                     <DiagramArrows shouldReduceMotion={shouldReduceMotion} />
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-start w-full">
                       {/* Column 1: SMB / Applicant */}
-                      <div className="flex flex-col items-center">
-                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4">SMB / Applicant</span>
-                        <div className="flex flex-col gap-4">
+                      <div className="flex flex-col items-center w-full min-w-0">
+                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4 text-center">SMB / Applicant</span>
+                        <div className="flex flex-col gap-4 w-full">
                           <DiagramNode label="Identity" icon={User} delay={1} />
                           <DiagramNode label="Registry" icon={Building2} delay={2} />
                         </div>
                       </div>
 
                       {/* Column 2: LumiqAI Signal Core */}
-                      <div className="flex flex-col items-center">
-                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4">LumiqAI Core</span>
-                        <div className="flex flex-col gap-4">
+                      <div className="flex flex-col items-center w-full min-w-0">
+                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4 text-center">LumiqAI Core</span>
+                        <div className="flex flex-col gap-4 w-full">
                           <DiagramNode label="Signal Enrichment" icon={Sparkles} delay={3} />
                           <DiagramNode label="Readiness Output" icon={Target} delay={4} />
                         </div>
                       </div>
 
                       {/* Column 3: Fintech Outcomes */}
-                      <div className="flex flex-col items-center">
-                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4">Outcomes</span>
-                        <div className="flex flex-col gap-4">
+                      <div className="flex flex-col items-center w-full min-w-0">
+                        <span className="text-black/50 text-xs tracking-widest uppercase mb-4 text-center">Outcomes</span>
+                        <div className="flex flex-col gap-4 w-full">
                           <DiagramNode label="Approve" icon={CheckCircle} delay={5} />
                           <DiagramNode label="Size Limits" icon={Gauge} delay={6} />
                           <DiagramNode label="Show Readiness" icon={LayoutDashboard} delay={7} />
@@ -512,15 +514,15 @@ export default function OperatingLoopSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.36, duration: 0.6 }}
-                className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr] gap-6 mb-8"
+                className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.65fr] gap-6 mb-8 w-full"
               >
                 {/* Table Card */}
-                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-6 md:p-8">
-                  <h3 className="text-xl md:text-2xl font-semibold text-black mb-6">
+                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-4 md:p-6 lg:p-8 w-full overflow-hidden">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-semibold text-black mb-4 md:mb-6 break-words">
                     Signals → Interpretation → Underwriting Use
                   </h3>
 
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto -mx-4 md:-mx-6 lg:-mx-8 px-4 md:px-6 lg:px-8">
                     <table className="w-full min-w-[480px]">
                       <thead>
                         <tr className="sticky top-0 bg-white/95 backdrop-blur border-b border-black/10">
@@ -554,10 +556,10 @@ export default function OperatingLoopSection() {
                 </Card>
 
                 {/* Underwriting UI Result Slot Card */}
-                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-6 md:p-8">
-                  <div className="flex items-center justify-between mb-6">
+                <Card className="rounded-3xl border border-black/10 bg-white shadow-sm p-4 md:p-6 lg:p-8 w-full overflow-hidden">
+                  <div className="flex items-center justify-between mb-4 md:mb-6 flex-wrap gap-2">
                     <h4 className="text-sm uppercase tracking-wider text-black/50 font-medium">Underwriting UI Output</h4>
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 text-black/60 border border-black/10 text-[10px] font-medium">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-black/5 text-black/60 border border-black/10 text-[10px] font-medium flex-shrink-0">
                       Embedded UI Slot
                     </span>
                   </div>
